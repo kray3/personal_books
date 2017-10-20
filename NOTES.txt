@@ -1,0 +1,13 @@
+# Notes
+
+* = actions done or started
+! = actions to begin or to do
+
+* Completed Database connection in php\website_configuration.php
+* Created Database personal_books with 'users' table w/ access rights of Full/View/None, default is None
+
+! Need to edit register.php to insert new users into database w/ secure password hashing (leave page looking like register.html)
+! Need to create login.php w/ password_verify and create 'login_history' tables to record logins (leave page looking like login.html)
+! Create password recovery function w/ deleting old passwords
+! Create dashboard page for successful login redirect
+! Create Change password function

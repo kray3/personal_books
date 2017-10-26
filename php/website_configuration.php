@@ -3,6 +3,7 @@
 
 $website_title = "Personal Books";
 date_default_timezone_set('America/Indianapolis');
+$open_registration = TRUE;
 
 
 /* Database Connection */

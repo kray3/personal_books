@@ -1,4 +1,9 @@
 <?php
+session_start(); //Allows for multi-page variable, primarily used for make sure user is logged in
+if(isset($_SESSION['username'])){
+	header("Location: dashboard"); //Redirect to dashboard if user is already logged in
+}
+
 require_once 'php/website_configuration.php'; //Grabs website configurations
 
 $page_title = "Login"; //set title for page
@@ -15,12 +20,12 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
 	if(empty($username) OR empty($password)){// OR $result === FALSE OR password_verify($password, $){
 		$error .= "Login failed.";
 	}
-	//Checks database for user and fetch its password
+	//Checks database for user and fetch its username and password
 	else{
-		$user_grab_info = $dbconnect->prepare("SELECT user_pass FROM users WHERE user_name=?");
+		$user_grab_info = $dbconnect->prepare("SELECT user_name, user_pass FROM users WHERE user_name=?");
 		$user_grab_info->bind_param("s", $username);
 		$user_grab_info->execute();
-		$user_grab_info->bind_result($fetched_pass); //Bind the grabbed pass to $fetched_pass
+		$user_grab_info->bind_result($fetched_user_name, $fetched_pass); //Bind the grabbed pass to $fetched_pass
 		$result = $user_grab_info->fetch(); //Allows us to use $fetched_pass
 		$user_grab_info->close();
 		
@@ -53,6 +58,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
 				$attempt = 'Success';
 				$record_login->execute();
 				$record_login->close();
+				$_SESSION['username'] = $fetched_user_name; //Set session variable = user_name to keep user logged in and for future calls to database while logged in
 				header("Location: dashboard");
 			}
 		}

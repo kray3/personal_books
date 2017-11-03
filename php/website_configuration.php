@@ -15,11 +15,11 @@ $database_name = "personal_books";
 $dbconnect = new mysqli($database_host, $database_user, $database_pass, $database_name);
 /* Database Connection Trouble shoot
 
-if ($mysqli->connect_errno) {
-    echo "Failed to connect to MySQL: (" . $mysqli->connect_errno . ") " . $mysqli->connect_error;
+if ($dbconnect->connect_errno) {
+    echo "Failed to connect to MySQL: (" . $dbconnect->connect_errno . ") " . $dbconnect->connect_error;
 }
 else{
-  echo $mysqli->host_info . "\n";
+  echo $dbconnect->host_info . "\n";
 }
 */
 ?>
